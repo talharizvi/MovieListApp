@@ -38,8 +38,8 @@ Make sure you have the following installed on your machine:
 3. Install dependencies:
     npm install
 
-### To run the app in emulator or physical device(Usage)
-
+### Usage
+To run the app in emulator or physical device
 1.Run the React Native Metro server
   npm start
 2.Run the app on android emulator or connected device
