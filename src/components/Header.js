@@ -1,28 +1,46 @@
 
-import React,{useState} from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import React,{useState, useEffect} from 'react';
+import { View, StyleSheet, Image, ScrollView } from 'react-native';
 import Category from './Category';
-import { categoryList } from '../constants';
-const Header = ({ title }) => {
-  const [selectedCategory, setSelectedCategory] = useState(categoryList[0]);
+import { apiKey } from '../constants';
+
+const Header = ({onGenreDataChange, onSelectCategoryChange}) => {
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [genreList, setGenreList] = useState([])
+
+  useEffect(()=>{
+  
+    const fetchGenres = async ()=>{
+      const genreResponse = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
+      const genreData = await genreResponse.json()
+      setGenreList(genreData.genres)
+      onGenreDataChange(genreData.genres)
+    }
+
+    fetchGenres()
+  
+  },[])
 
   const handleCategoryPress = (category) => {
-    setSelectedCategory(category);
+    const isCategorySelected = selectedCategory.some((item) => item.id === category.id);
+    const updatedCategoryList = isCategorySelected
+    ? selectedCategory.filter((item) => item.id !== category.id)
+    : [...selectedCategory, category];
+
+    setSelectedCategory(updatedCategoryList);
+    onSelectCategoryChange(updatedCategoryList);
   };
 
   return (
     <View style={styles.header}>
       <Image source={require('../assets/images/Title.png')} width={100} height={50}/>
       <ScrollView style={{flexDirection:'row', marginVertical:8}} horizontal>
-        {categoryList.map((item, index)=><Category key={index} title={item} selected={item === selectedCategory} onPress={()=>handleCategoryPress(item)} />)}
+        {genreList.map((item)=><Category key={item.id} title={item.name} selected={selectedCategory.some((selectedItem) => selectedItem.id === item.id)} onPress={()=>handleCategoryPress(item)} />)}
       </ScrollView>
-      
-      
     </View>
   );
 };
 
-console.log('test')
 
 const styles = StyleSheet.create({
   header: {
