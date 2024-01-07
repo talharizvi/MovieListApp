@@ -32,7 +32,7 @@ Make sure you have the following installed on your machine:
 ### Installation
 
 1. Clone the repository:
-   git clone https://github.com/your-username/react-native-movie-fix-app.git](https://github.com/talharizvi/MovieListApp.git
+   [git clone https://github.com/your-username/react-native-movie-fix-app.git](https://github.com/talharizvi/MovieListApp.git](https://github.com/talharizvi/MovieListApp.git)
 2. Change to the project directory:
    cd MovieListApp
 3. Install dependencies:
