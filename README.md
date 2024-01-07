@@ -1,4 +1,6 @@
- 
+App Demo:
+![](https://github.com/talharizvi/MovieListApp/blob/main/movie-list.gif) 
+
 # MovieListApp(React Native)
 
 Welcome to the React Native Movie Fix app! This app displays a list of movies grouped by year, supports pagination, smooth scrolling, and allows users to filter movies by selecting multiple categories.
